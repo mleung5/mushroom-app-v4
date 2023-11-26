@@ -76,6 +76,13 @@ Your folder structure should look like this:
    |-secrets
 ```
 
+### Replace GCP project id
+The following files will need to be modified to replace the GCP project `ac215-project` to your GCP project id.
+
+* inventory.yml
+* inventory-prod.yml
+* docker-shell.sh or docker-shell.bat
+
 ## Ensure Kubernetes Cluster is Up
 
 We deployed our mushroom app to a Kubernetes cluster in the previous tutorial. In order to perform Continuous Integration and Continuous Deployment we will assume the cluster already exists. If your cluster is not running, follow these steps to get it created and running:
