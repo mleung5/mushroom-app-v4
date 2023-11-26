@@ -161,4 +161,14 @@ async def get_api_status():
 export const APP_VERSION = 1.1;
 ```
 
+To run the deploy app action, add the following to code commit comment:
+* Add `/run-deploy-app` to the commit message to re-deploy the frontend and backend
+
 ### ML Component Changes
+
+We can make changes to ML code and commit to GitHub and invoke running ML Tasks in Vertex AI
+
+To run Vertex AI Pipelines on code commits, add the following to code commit comment:
+* Add `/run-ml-pipeline` to the commit message to run the entire Vertex AI ML pipeline
+* Add `/run-data-collector` to the commit message to run the data collector ML pipeline
+* Add `/run-data-processor` to the commit message to run the data processor ML pipeline
