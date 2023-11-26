@@ -78,22 +78,33 @@ Your folder structure should look like this:
 
 ## Ensure Kubernetes Cluster is Up
 
-We deployed our mushroom app to a Kubernetes cluster in the previous tutorial. In order to perform Continuous Integration and Continuous Deployment we will assume the cluster already exists. If you cluster is not running follow these steps to get it created and running:
+We deployed our mushroom app to a Kubernetes cluster in the previous tutorial. In order to perform Continuous Integration and Continuous Deployment we will assume the cluster already exists. If your cluster is not running, follow these steps to get it created and running:
 
-### OPTIONAL: Run `deployment` container
+### Run `deployment` container
 - cd into `deployment`
 - Go into `docker-shell.sh` or `docker-shell.bat` and change `GCP_PROJECT` to your project id
 - Run `sh docker-shell.sh` or `docker-shell.bat` for windows
 
 
 #### Build and Push Docker Containers to GCR (Google Container Registry)
+Run this step only if you did not build + push images to GCR in our last tutorial.
 ```
 ansible-playbook deploy-docker-images.yml -i inventory.yml
 ```
 
 #### Create & Deploy Cluster
+Run this step if you do not have a Kubernetes cluster running.
 ```
 ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=present
+```
+
+#### View the App
+* Copy the `nginx_ingress_ip` from the terminal from the create cluster command
+* Go to `http://<YOUR INGRESS IP>.sslip.io`
+
+#### Delete Cluster
+```
+ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=absent
 ```
 
 ## Continuous Integration and Continuous Deployment (CI/CD) 
