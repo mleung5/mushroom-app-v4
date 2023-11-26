@@ -68,7 +68,7 @@ jobs:
             -e GCS_SERVICE_ACCOUNT=ml-workflow@ac215-project.iam.gserviceaccount.com \
             -e GCP_REGION=us-central1 \
             -e GCS_PACKAGE_URI=gs://mushroom-app-trainer-code \
-            mushroom-app-deployment python cli.py --data_collector
+            mushroom-app-deployment sh run-data-collector.sh
       - name: Run Data Processor
         if: contains(github.event.head_commit.message, '/run-data-processor')
         run: |-
@@ -87,7 +87,7 @@ jobs:
             -e GCS_SERVICE_ACCOUNT=ml-workflow@ac215-project.iam.gserviceaccount.com \
             -e GCP_REGION=us-central1 \
             -e GCS_PACKAGE_URI=gs://mushroom-app-trainer-code \
-            mushroom-app-deployment python cli.py --data_processor
+            mushroom-app-deployment sh run-data-processor.sh
       - name: Run ML Pipeline
         if: contains(github.event.head_commit.message, '/run-ml-pipeline')
         run: |-
@@ -106,5 +106,5 @@ jobs:
             -e GCS_SERVICE_ACCOUNT=ml-workflow@ac215-project.iam.gserviceaccount.com \
             -e GCP_REGION=us-central1 \
             -e GCS_PACKAGE_URI=gs://mushroom-app-trainer-code \
-            mushroom-app-deployment python cli.py --pipeline
+            mushroom-app-deployment sh run-ml-pipeline.sh
       - run: echo "Job's status is ${{ job.status }}."
