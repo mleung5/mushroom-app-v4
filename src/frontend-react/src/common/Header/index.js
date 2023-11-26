@@ -34,11 +34,11 @@ const Header = (props) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
     const [settingsMenuAnchorEl, setSettingsMenuAnchorEl] = useState(null);
-    const [apiStatus, setApiStatus] = useState(null);
+    const [version, setVersion] = useState(null);
     const loadStatus = () => {
         DataService.GetStatus()
             .then(function (response) {
-                setApiStatus(response.data);
+                setVersion(response.data["version"]);
             });
     }
 
@@ -74,7 +74,7 @@ const Header = (props) => {
                             <Typography variant="caption">&nbsp;App Version: {APP_VERSION}</Typography>
                         </IconButton>
                         <IconButton color="inherit" >
-                            <Typography variant="caption">&nbsp;API Version: {apiStatus.version}</Typography>
+                            <Typography variant="caption">&nbsp;API Version: {version}</Typography>
                         </IconButton>
                     </div>
                     <div className={classes.grow} />
