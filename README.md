@@ -102,10 +102,27 @@ ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_st
 * Copy the `nginx_ingress_ip` from the terminal from the create cluster command
 * Go to `http://<YOUR INGRESS IP>.sslip.io`
 
+* Example: http://34.148.61.120.sslip.io/
+
 #### Delete Cluster
 ```
 ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=absent
 ```
+
+## Setup GitHub Action Workflow Credentials
+
+In this step we need to setup credentials in GitHub so that we can perform the following functions in GCP:
+* Push docker images to GCR
+* Run Vertex AI pipeline jobs
+* Update kubernetes deployments 
+
+### Setup
+
+* Go to the repo Settings
+* Select "Secrets and variable" from the left side menu and select "Actions"
+* Under "Repository secrets" click "New repository secret"
+* Give the name as "GOOGLE_APPLICATION_CREDENTIALS"
+* For the value copy+paste the contents of your secrets file `deployment.json` 
 
 ## Continuous Integration and Continuous Deployment (CI/CD) 
 
