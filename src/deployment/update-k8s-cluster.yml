@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars:
-    cluster_name: "test-app-cluster"
+    cluster_name: "mushroom-app-cluster"
   
   tasks:
   - name: "Connect to cluster (update kubeconfig)"
@@ -43,11 +43,11 @@
                 run: frontend
             spec:
               containers:
-              - image: "gcr.io/{{ gcp_project }}/test-app-frontend-simple:{{ tag.stdout}}"
+              - image: "gcr.io/{{ gcp_project }}/mushroom-app-frontend-react:{{ tag.stdout}}"
                 imagePullPolicy: IfNotPresent
                 name: frontend
                 ports:
-                - containerPort: 8080
+                - containerPort: 80
                   protocol: TCP
               restartPolicy: Always
   
@@ -76,7 +76,7 @@
                   secret:
                     secretName: gcp-service-key
               containers:
-              - image: gcr.io/{{ gcp_project }}/test-app-api-service:{{ tag.stdout}}
+              - image: gcr.io/{{ gcp_project }}/mushroom-app-api-service:{{ tag.stdout}}
                 imagePullPolicy: IfNotPresent
                 name: api
               restartPolicy: Always

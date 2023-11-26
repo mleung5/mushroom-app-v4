@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,7 +19,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Icon from '@material-ui/core/Icon';
 import { Link } from 'react-router-dom';
 
+import { APP_VERSION } from '../../services/Common';
 
+import DataService from "../../services/DataService";
 import styles from './styles';
 
 const Header = (props) => {
@@ -32,6 +34,18 @@ const Header = (props) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
     const [settingsMenuAnchorEl, setSettingsMenuAnchorEl] = useState(null);
+    const [apiStatus, setApiStatus] = useState(null);
+    const loadStatus = () => {
+        DataService.GetStatus()
+            .then(function (response) {
+                setApiStatus(response.data);
+            });
+    }
+
+    // Setup Component
+    useEffect(() => {
+        loadStatus();
+    }, []);
 
     const toggleDrawer = (open) => () => {
         setDrawerOpen(open)
@@ -55,7 +69,14 @@ const Header = (props) => {
                             🍄 Mushroom Identifier
                         </Typography>
                     </Link>
-
+                    <div>
+                        <IconButton color="inherit" >
+                            <Typography variant="caption">&nbsp;App Version: {APP_VERSION}</Typography>
+                        </IconButton>
+                        <IconButton color="inherit" >
+                            <Typography variant="caption">&nbsp;API Version: {apiStatus.version}</Typography>
+                        </IconButton>
+                    </div>
                     <div className={classes.grow} />
 
 

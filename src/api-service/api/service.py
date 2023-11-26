@@ -7,6 +7,7 @@ import os
 from fastapi import File
 from tempfile import TemporaryDirectory
 from api import model
+import tensorflow as tf
 
 # Initialize Tracker Service
 tracker_service = TrackerService()
@@ -81,3 +82,11 @@ async def predict(file: bytes = File(...)):
 
     print(prediction_results)
     return prediction_results
+
+
+@app.get("/status")
+async def get_api_status():
+    return {
+        "version": "API Version: 2.0",
+        "tf_version": tf.__version__,
+    }

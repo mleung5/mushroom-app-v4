@@ -19,6 +19,9 @@ const DataService = {
             }
         });
     },
+    GetStatus: async function () {
+        return await axios.get(BASE_API_URL + "/status");
+    },
 }
 
 export default DataService;
