@@ -140,3 +140,25 @@ Continuous Integration and Continuous Delivery/Continuous Deployment (CI/CD) is 
 **Continuous Delivery (CD):** This is an extension of CI, focusing on automating the delivery of applications to various environments, like staging or testing, in a way that they can be released to production at any time. The emphasis is on ensuring that the software can be deployed to a production environment and is ready for release but does not necessarily release it to the end users automatically.
 
 **Continuous Deployment (CD):** This takes the automation a step further by automatically deploying code changes to production after they pass all the automated tests in the deployment pipeline. This approach allows for a rapid release cycle and is commonly used in scenarios where rapid deployment and iteration are essential.
+
+### Frontend & Backend Changes
+
+We have a GitHub Action that will build and deploy a new version of the app when a git commit has a comment `/run-deploy-app`
+
+* Open the file `src` / `api-service` / `api` / `service.py`
+* Update the version in line 90:
+```
+@app.get("/status")
+async def get_api_status():
+    return {
+        "version": "2.1",
+        "tf_version": tf.__version__,
+    }
+```
+* Open the file `src` / `frontend-react` / `src` / `services` / `Common.js`
+* Update the version in line 2:
+```
+export const APP_VERSION = 1.1;
+```
+
+### ML Component Changes
