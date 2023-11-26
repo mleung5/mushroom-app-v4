@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# exit immediately if a command exits with a non-zero status
-#set -e
-
 # Define some environment variables
-export IMAGE_NAME="test-app-deployment"
+export IMAGE_NAME="mushroom-app-deployment"
 export BASE_DIR=$(pwd)
 export SECRETS_DIR=$(pwd)/../../../secrets/
 export GCP_PROJECT="ac215-project" # Change to your GCP Project
@@ -24,8 +21,7 @@ docker run --rm --name $IMAGE_NAME -ti \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v "$BASE_DIR":/app \
 -v "$SECRETS_DIR":/secrets \
--v "$HOME/.ssh":/home/app/.ssh \
--v "$BASE_DIR/../frontend-simple":/frontend-simple \
+-v "$BASE_DIR/../frontend-react":/frontend-react \
 -v "$BASE_DIR/../api-service":/api-service \
 -v "$BASE_DIR/../data-collector":/data-collector \
 -v "$BASE_DIR/../data-processor":/data-processor \

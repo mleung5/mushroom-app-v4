@@ -46,6 +46,56 @@ Search for each of these in the GCP search bar and click enable to enable these 
 * Google Container Registry API
 * Kubernetes Engine API
 
+### Setup GCP Service Account for deployment
+- Here are the step to create a service account:
+- To setup a service account you will need to go to [GCP Console](https://console.cloud.google.com/home/dashboard), search for  "Service accounts" from the top search box. or go to: "IAM & Admins" > "Service accounts" from the top-left menu and create a new service account called "deployment". 
+- Give the following roles:
+- For `deployment`:
+    - Compute Admin
+    - Compute OS Login
+    - Container Registry Service Agent
+    - Kubernetes Engine Admin
+    - Service Account User
+    - Storage Admin
+    - Vertex AI Administrator
+- Then click done.
+- This will create a service account
+- On the right "Actions" column click the vertical ... and select "Create key". A prompt for Create private key for "deployment" will appear select "JSON" and click create. This will download a Private key json file to your computer. Copy this json file into the **secrets** folder.
+- Rename the json key file to `deployment.json`
+
+Your folder structure should look like this:
+```
+   |-mushroom-app-v4
+      |-images
+        |-src
+        |---data-collector
+        |---data-processor
+        |---api-service
+        |---frontend-react
+        |---deployment
+   |-secrets
+```
+
+## Ensure Kubernetes Cluster is Up
+
+We deployed our mushroom app to a Kubernetes cluster in the previous tutorial. In order to perform Continuous Integration and Continuous Deployment we will assume the cluster already exists. If you cluster is not running follow these steps to get it created and running:
+
+### OPTIONAL: Run `deployment` container
+- cd into `deployment`
+- Go into `docker-shell.sh` or `docker-shell.bat` and change `GCP_PROJECT` to your project id
+- Run `sh docker-shell.sh` or `docker-shell.bat` for windows
+
+
+#### Build and Push Docker Containers to GCR (Google Container Registry)
+```
+ansible-playbook deploy-docker-images.yml -i inventory.yml
+```
+
+#### Create & Deploy Cluster
+```
+ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=present
+```
+
 ## Continuous Integration and Continuous Deployment (CI/CD) 
 
 Continuous Integration and Continuous Delivery/Continuous Deployment (CI/CD) is a set of principles and practices in software development and operations aimed at frequently delivering code changes reliably and efficiently.
