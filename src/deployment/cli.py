@@ -1,6 +1,6 @@
 """
 Module that contains the command line app.
-
+ 
 Typical usage example from command line:
         python cli.py
 """
