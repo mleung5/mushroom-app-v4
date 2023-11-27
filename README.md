@@ -8,7 +8,7 @@ In this tutorial we will put all the components we built for our Mushroom App to
 * Model Deploy: Updates trained models signature with preprocessing logic added to it. Upload model to Vertex AI Model Registry and Deploy model to Model Endpoints.
 * API Service: FastAPI service to expose APIs to the frontend.
 * Frontend:  React Frontend for the mushroom app.
-<img src="images/ml-pipeline.png"  width="400">
+<img src="images/ci-cd.png"  width="400">
 
 ## Prerequisites
 * Have Docker installed
