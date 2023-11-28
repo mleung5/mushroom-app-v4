@@ -162,7 +162,7 @@ export const APP_VERSION = 1.1;
 ```
 
 To run the deploy app action, add the following to code commit comment:
-* Add `/run-deploy-app` to the commit message to re-deploy the frontend and backend (this is done outside the container)
+* Add `/run-deploy-app` to the commit message to re-deploy the frontend and backend (do this outside the container)
 
 ### ML Component Changes
 
