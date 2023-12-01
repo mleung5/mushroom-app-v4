@@ -88,6 +88,6 @@ async def predict(file: bytes = File(...)):
 async def get_api_status():
     return {
         ## "version": "2.4",  ## pretend code changed here from 2.4 to 2.888 as below
-        "version": "2.888",
+        "version": "2.8888",
         "tf_version": tf.__version__,
     }
