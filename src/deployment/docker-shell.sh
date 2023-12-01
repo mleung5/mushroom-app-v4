@@ -4,21 +4,21 @@
 export IMAGE_NAME="mushroom-app-deployment"
 export BASE_DIR=$(pwd)
 export SECRETS_DIR=$(pwd)/../../../secrets/
-export GCP_PROJECT="ac215-project" # Change to your GCP Project
+export GCP_PROJECT="ac215-mleung-398423" # Change to your GCP Project
 export GCP_ZONE="us-central1-a"
-export GOOGLE_APPLICATION_CREDENTIALS=/secrets/deployment.json
-export GCS_BUCKET_NAME="mushroom-app-ml-workflow-demo"
-export GCS_SERVICE_ACCOUNT="ml-workflow@ac215-project.iam.gserviceaccount.com"
+export GOOGLE_APPLICATION_CREDENTIALS=../../../secrets/deployment.json
+export GCS_BUCKET_NAME="lec12_bucket_uscentral1"
+export GCS_SERVICE_ACCOUNT="ml-workflow@ac215-mleung-398423.iam.gserviceaccount.com"
 export GCP_REGION="us-central1"
-export GCS_PACKAGE_URI="gs://mushroom-app-trainer-code"
+export GCS_PACKAGE_URI="gs://lec12_bucket_uscentral1"
 
 # Build the image based on the Dockerfile
 #docker build -t $IMAGE_NAME -f Dockerfile .
 docker build -t $IMAGE_NAME --platform=linux/amd64 -f Dockerfile .
 
 # Run the container
-docker run --rm --name $IMAGE_NAME -ti \
--v /var/run/docker.sock:/var/run/docker.sock \
+winpty docker run --rm --name $IMAGE_NAME -ti \
+-v //var/run/docker.sock:/var/run/docker.sock \
 -v "$BASE_DIR":/app \
 -v "$SECRETS_DIR":/secrets \
 -v "$BASE_DIR/../frontend-react":/frontend-react \
